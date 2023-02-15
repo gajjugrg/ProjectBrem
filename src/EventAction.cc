@@ -3,7 +3,8 @@
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
-#include "G4AnalysisManager.hh"
+#include "G4AnalysisManager.hh"  // G4_11
+//#include "g4root.hh"  // G4_10
 #include "G4UnitsTable.hh"
 
 #include "Randomize.hh"

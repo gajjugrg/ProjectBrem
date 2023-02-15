@@ -3,7 +3,8 @@
 
 #include "G4UserRunAction.hh"
 #include "globals.hh"
-#include "G4AnalysisManager.hh"
+#include "G4AnalysisManager.hh" // G4_11
+//#include "g4root.hh"  // G4_10
 
 class G4Run;
 

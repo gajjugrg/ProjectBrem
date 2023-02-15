@@ -1,7 +1,8 @@
 #include "DetectorConstruction.hh"
 #include "ActionInitialization.hh"
 
-#include "G4RunManagerFactory.hh"
+//#include "G4MTRunManager.hh"  // for G4_10
+#include "G4RunManagerFactory.hh" // for G4_11
 #include "G4SteppingVerbose.hh"
 #include "G4UImanager.hh"
 #include "QBBC.hh"
@@ -27,12 +28,16 @@ int main(int argc,char** argv)
 
   //use G4SteppingVerboseWithUnits
   G4int precision = 4;
-  G4SteppingVerbose::UseBestUnit(precision);
+  //G4SteppingVerbose::UseBestUnit(precision);
 
   // Construct the default run manager
   //
+  /*
   auto* runManager =
     G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
+    */ // for G4_11
+  G4MTRunManager* runManager = new G4MTRunManager;
+  runManager->SetNumberOfThreads(12);
 
   // Set mandatory initialization classes
   //
