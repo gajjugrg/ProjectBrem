@@ -1,8 +1,8 @@
 #include "DetectorConstruction.hh"
 #include "ActionInitialization.hh"
 
-//#include "G4MTRunManager.hh"  // for G4_10
-#include "G4RunManagerFactory.hh" // for G4_11
+#include "G4MTRunManager.hh"  // for G4_10
+//#include "G4RunManagerFactory.hh" // for G4_11
 #include "G4SteppingVerbose.hh"
 #include "G4UImanager.hh"
 #include "QBBC.hh"
