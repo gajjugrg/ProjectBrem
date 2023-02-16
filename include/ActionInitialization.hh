@@ -1,11 +1,11 @@
-#ifndef B1ActionInitialization_h
-#define B1ActionInitialization_h 1
+#ifndef BremActionInitialization_h
+#define BremActionInitialization_h 1
 
 #include "G4VUserActionInitialization.hh"
 
 /// Action initialization class.
 
-namespace B1
+namespace Brem
 {
 
 class ActionInitialization : public G4VUserActionInitialization

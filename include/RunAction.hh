@@ -1,5 +1,5 @@
-#ifndef B1RunAction_h
-#define B1RunAction_h 1
+#ifndef BremRunAction_h
+#define BremRunAction_h 1
 
 #include "G4UserRunAction.hh"
 #include "globals.hh"
@@ -8,7 +8,7 @@
 
 class G4Run;
 
-namespace B1
+namespace Brem
 {
 
 class RunAction : public G4UserRunAction

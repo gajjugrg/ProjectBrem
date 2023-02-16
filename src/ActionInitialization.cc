@@ -33,7 +33,7 @@
 #include "EventAction.hh"
 #include "SteppingAction.hh"
 
-namespace B1
+namespace Brem
 {
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -65,11 +65,9 @@ void ActionInitialization::Build() const
   auto eventAction = new EventAction;
   SetUserAction(eventAction);
   SetUserAction(new SteppingAction(eventAction));
-//    SetUserAction(new PrimaryGeneratorAction);
-//    SetUserAction(new RunAction);
-//    auto eventAction = new EventAction;
-//    SetUserAction(eventAction);
-//    SetUserAction(new SteppingAction(fDetConstruction,eventAction));
+    
+    
+    
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

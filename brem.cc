@@ -12,7 +12,7 @@
 
 #include "Randomize.hh"
 
-using namespace B1;
+using namespace Brem;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -28,7 +28,7 @@ int main(int argc,char** argv)
 
   //use G4SteppingVerboseWithUnits
   G4int precision = 4;
-  //G4SteppingVerbose::UseBestUnit(precision);
+  G4SteppingVerbose::UseBestUnit(precision);
 
   // Construct the default run manager
   //

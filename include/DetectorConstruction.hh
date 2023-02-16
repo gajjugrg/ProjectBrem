@@ -1,5 +1,5 @@
-#ifndef B1DetectorConstruction_h
-#define B1DetectorConstruction_h 1
+#ifndef BremDetectorConstruction_h
+#define BremDetectorConstruction_h 1
 
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
@@ -9,7 +9,7 @@ class G4LogicalVolume;
 
 /// Detector construction class to define materials and geometry.
 
-namespace B1
+namespace Brem
 {
 
 class DetectorConstruction : public G4VUserDetectorConstruction

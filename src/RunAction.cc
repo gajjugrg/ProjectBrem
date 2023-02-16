@@ -11,7 +11,7 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
-namespace B1
+namespace Brem
 {
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -34,9 +34,9 @@ RunAction::RunAction()
 
       // Creating ntuple
       //
-      analysisManager->CreateNtuple("brem", "Edep and TrackL");
+      analysisManager->CreateNtuple("brem", "High Energy Electron bremsstrahlung in Carbon");
       analysisManager->CreateNtupleDColumn("fEnergyDeposit");
-//      analysisManager->CreateNtupleDColumn("fEnergyIni");
+      analysisManager->CreateNtupleIColumn("fTrackID");
 //      analysisManager->CreateNtupleDColumn("fTrackLength");
 //      analysisManager->CreateNtupleSColumn("fProcess");
     
@@ -56,10 +56,8 @@ void RunAction::BeginOfRunAction(const G4Run*)
     auto analysisManager = G4AnalysisManager::Instance();
     // open an outputfile
     G4String fileName = "bremOutput.root";
-    
-
     analysisManager->OpenFile(fileName);
-    G4cout << "Using " << analysisManager->GetType() << G4endl;
+    
 
 }
 
@@ -68,6 +66,8 @@ void RunAction::BeginOfRunAction(const G4Run*)
 void RunAction::EndOfRunAction(const G4Run*)
 {
     auto analysisManager = G4AnalysisManager::Instance();
+    
+    //write and close the file at the end of each run
     analysisManager->Write();
     analysisManager->CloseFile();
 }

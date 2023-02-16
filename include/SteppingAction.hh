@@ -1,5 +1,5 @@
-#ifndef B1SteppingAction_h
-#define B1SteppingAction_h 1
+#ifndef BremSteppingAction_h
+#define BremSteppingAction_h 1
 
 #include "G4UserSteppingAction.hh"
 #include "globals.hh"
@@ -9,7 +9,7 @@ class G4LogicalVolume;
 /// Stepping action class
 ///
 
-namespace B1
+namespace Brem
 {
 
 class EventAction;
@@ -24,8 +24,8 @@ class SteppingAction : public G4UserSteppingAction
     void UserSteppingAction(const G4Step* step) override;
 
   private:
-    EventAction* fEventAction = nullptr;
-    G4LogicalVolume* fScoringVolume = nullptr;
+//    EventAction* fEventAction = nullptr;
+//    G4LogicalVolume* fScoringVolume = nullptr;
 };
 
 }
