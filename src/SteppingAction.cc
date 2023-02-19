@@ -7,8 +7,14 @@
 #include "G4RunManager.hh"
 #include "G4LogicalVolume.hh"
 #include "G4Track.hh"
-//#include "g4root.hh" // for G4_10
+
+
+// version dependent header files
+#if G4VERSION_NUMBER != 1100
+#include "g4root.hh" // for G4_10
+#elif
 #include "G4AnalysisManager.hh" // for G4_11
+#endif
 
 namespace Brem
 {
@@ -17,6 +23,13 @@ namespace Brem
 
   SteppingAction::SteppingAction(EventAction* eventAction)
     :fEventAction(eventAction)
+  {}
+
+  //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+  SteppingAction::SteppingAction(EventAction* eventAction, G4double initEnergy)
+    :fEventAction(eventAction),
+    fInitEnergy(initEnergy)
   {}
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -53,6 +66,7 @@ namespace Brem
       
       G4Track* track = step->GetTrack();
       
+      // identify primary track
       if (track->GetTrackID()== 1){
         
 //          G4cout << "PID: " << track->GetDefinition()->GetParticleName() << G4endl;
@@ -60,12 +74,23 @@ namespace Brem
 //          auto trkID  = track->GetTrackID();
           auto trkLength = track ->GetTrackLength();
           auto ProcName = step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
-          
-    
-          fEventAction->AddTrack(trkLength);
-          
+
+          //fEventAction->AddTrack(trkLength);
+          //G4cout << "In the current step, track ID is: " << track->GetTrackID() << ", track length: " << trkLength << " was added to fTrackLength, which is currently: " << fEventAction->GetTrackLength() << G4endl;
+
+          // Prepare analysis manager
+          auto analysisManager = G4AnalysisManager::Instance();
           if(ProcName == "eBrem"){
-              track->SetTrackStatus(fStopAndKill);
+            G4cout << "========================= A BREMSSTRAHLUNG EVENT ====================================" << G4endl;
+            // save the data
+            G4cout << "A bremsstrahlung from primary particle has been recorded." << G4endl;
+            G4cout << "fTrackLength: " << trkLength << G4endl;
+            analysisManager->FillNtupleDColumn(0, fInitEnergy);
+            analysisManager->FillNtupleDColumn(1, trkLength/CLHEP::cm);
+            analysisManager->AddNtupleRow();
+
+            // kill the process
+            track->SetTrackStatus(fStopAndKill);
           }
 //
 //          G4cout << "trkLength is: " << trkLength << " & Post Step Process is: "  << ProcName << G4endl;
@@ -82,7 +107,8 @@ namespace Brem
 //          // Finish writing TTree for an event.
 //          analysisManager->AddNtupleRow();
       }
-      if(track->GetTrackID() !=1){
+      else if( track->GetTrackID() != 1 )
+      {
           track->SetTrackStatus(fStopAndKill);
       }
   }

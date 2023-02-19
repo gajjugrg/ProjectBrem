@@ -14,6 +14,12 @@ ActionInitialization::ActionInitialization()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+ActionInitialization::ActionInitialization(G4double initEnergy)
+  : fInitEnergy(initEnergy)
+{}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
 ActionInitialization::~ActionInitialization()
 {}
 
@@ -21,7 +27,7 @@ ActionInitialization::~ActionInitialization()
 
 void ActionInitialization::BuildForMaster() const
 {
-  RunAction* runAction = new RunAction;
+  RunAction* runAction = new RunAction(fInitEnergy);
   SetUserAction(runAction);
 }
 
@@ -29,13 +35,18 @@ void ActionInitialization::BuildForMaster() const
 
 void ActionInitialization::Build() const
 {
-  SetUserAction(new PrimaryGeneratorAction);
+  // Default constructor ( 1 GeV electron )
+  //SetUserAction(new PrimaryGeneratorAction());
 
-  RunAction* runAction = new RunAction;
+  // User-input energy mode
+  SetUserAction(new PrimaryGeneratorAction(fInitEnergy));
+
+  G4cout << "Init RunAction with fInitEnergy: " << fInitEnergy << G4endl;
+  RunAction* runAction = new RunAction(fInitEnergy);
   SetUserAction(runAction);
   auto eventAction = new EventAction;
   SetUserAction(eventAction);
-  SetUserAction(new SteppingAction(eventAction));
+  SetUserAction(new SteppingAction(eventAction, fInitEnergy));
     
     
     

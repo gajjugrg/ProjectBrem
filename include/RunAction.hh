@@ -3,8 +3,13 @@
 
 #include "G4UserRunAction.hh"
 #include "globals.hh"
+
+// version dependent header files
+#if G4VERSION_NUMBER != 1100
+#include "g4root.hh"  // G4_10
+#elif
 #include "G4AnalysisManager.hh" // G4_11
-//#include "g4root.hh"  // G4_10
+#endif
 
 class G4Run;
 
@@ -15,6 +20,7 @@ class RunAction : public G4UserRunAction
 {
   public:
     RunAction();
+    RunAction(G4double initEnergy);
     ~RunAction() override;
 
     void BeginOfRunAction(const G4Run*) override;
@@ -22,6 +28,7 @@ class RunAction : public G4UserRunAction
     
     
 private:
+    G4double fInitEnergy;
 
 };
 

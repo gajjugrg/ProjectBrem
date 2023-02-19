@@ -22,6 +22,7 @@ public:
     void EndOfEventAction(const G4Event* event) override;
     
     void AddTrack(G4double le);
+    inline G4double GetTrackLength(){ return fTrackLength; }
     
     
 private:

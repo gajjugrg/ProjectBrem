@@ -21,6 +21,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
     PrimaryGeneratorAction();
+    PrimaryGeneratorAction(G4double initEnergy);
     ~PrimaryGeneratorAction() override;
 
     // method from the base class
@@ -32,6 +33,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   private:
     G4ParticleGun* fParticleGun = nullptr; // pointer a to G4 gun class
     G4Box* fEnvelopeBox = nullptr;
+    G4double fInitEnergy;
 };
 
 }

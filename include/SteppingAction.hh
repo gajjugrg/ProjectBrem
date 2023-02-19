@@ -18,6 +18,7 @@ class SteppingAction : public G4UserSteppingAction
 {
   public:
     SteppingAction(EventAction* eventAction);
+    SteppingAction(EventAction* eventAction, G4double initEnergy);
     ~SteppingAction() override;
 
     // method from the base class
@@ -25,6 +26,7 @@ class SteppingAction : public G4UserSteppingAction
 
   private:
     EventAction* fEventAction = nullptr;
+    G4double fInitEnergy;
 };
 
 }
