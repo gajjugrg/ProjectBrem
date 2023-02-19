@@ -7,16 +7,16 @@
 #include "G4RunManager.hh"
 #include "G4LogicalVolume.hh"
 #include "G4Track.hh"
-#include "g4root.hh" // for G4_10
-//#include "G4AnalysisManager.hh" // for G4_11
+//#include "g4root.hh" // for G4_10
+#include "G4AnalysisManager.hh" // for G4_11
 
 namespace Brem
 {
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-  SteppingAction::SteppingAction(EventAction* /*eventAction*/)
-    //:fEventAction(eventAction)
+  SteppingAction::SteppingAction(EventAction* eventAction)
+    :fEventAction(eventAction)
   {}
 
   //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -55,21 +55,32 @@ namespace Brem
       
       if (track->GetTrackID()== 1){
         
-          G4cout << "PID: " << track->GetDefinition()->GetParticleName() << G4endl;
-          auto edep = step->GetTotalEnergyDeposit();
-          auto trk  = track->GetTrackID();
+//          G4cout << "PID: " << track->GetDefinition()->GetParticleName() << G4endl;
+//          auto edep = step->GetTotalEnergyDeposit();
+//          auto trkID  = track->GetTrackID();
+          auto trkLength = track ->GetTrackLength();
+          auto ProcName = step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
           
-          G4cout << "Track id is: " << trk << G4endl;
-          G4cout << "Edep in current step (MeV): " << edep/CLHEP::keV << G4endl;
-          G4cout << "Position X: " << track->GetPosition().getX()/CLHEP::cm << ", Y: " << track->GetPosition().getY()/CLHEP::cm << ", Z: " << track->GetPosition().getZ()/CLHEP::cm << G4endl;
+    
+          fEventAction->AddTrack(trkLength);
           
-          // refer the analysisManager of current session
-          auto analysisManager = G4AnalysisManager::Instance();
-          // Save the <edep> variable content in the first TTree leave.
-          analysisManager->FillNtupleDColumn(0, edep);
-          analysisManager->FillNtupleIColumn(1, trk);
-          // Finish writing TTree for an event.
-          analysisManager->AddNtupleRow();
+          if(ProcName == "eBrem"){
+              track->SetTrackStatus(fStopAndKill);
+          }
+//
+//          G4cout << "trkLength is: " << trkLength << " & Post Step Process is: "  << ProcName << G4endl;
+//          G4cout << "Track id is: " << trkID << G4endl;
+//          G4cout << "Edep in current step (MeV): " << edep/CLHEP::keV << G4endl;
+//          G4cout << "Position X: " << track->GetPosition().getX()/CLHEP::cm << ", Y: " << track->GetPosition().getY()/CLHEP::cm << ", Z: " << track->GetPosition().getZ()/CLHEP::cm << G4endl;
+//
+//          // refer the analysisManager of current session
+//          auto analysisManager = G4AnalysisManager::Instance();
+//          // Save the <edep> variable content in the first TTree leave.
+//          analysisManager->FillNtupleDColumn(0, edep);
+//          analysisManager->FillNtupleIColumn(1, trkID);
+//          analysisManager->FillNtupleDColumn(2,trkLength);
+//          // Finish writing TTree for an event.
+//          analysisManager->AddNtupleRow();
       }
       if(track->GetTrackID() !=1){
           track->SetTrackStatus(fStopAndKill);

@@ -1,8 +1,6 @@
 #include "RunAction.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "DetectorConstruction.hh"
-// #include "Run.hh"
-
 #include "G4RunManager.hh"
 #include "G4Run.hh"
 #include "G4AccumulableManager.hh"
@@ -34,10 +32,10 @@ RunAction::RunAction()
 
       // Creating ntuple
       //
-      analysisManager->CreateNtuple("brem", "High Energy Electron bremsstrahlung in Carbon");
-      analysisManager->CreateNtupleDColumn("fEnergyDeposit");
-      analysisManager->CreateNtupleIColumn("fTrackID");
-//      analysisManager->CreateNtupleDColumn("fTrackLength");
+      analysisManager->CreateNtuple("brem", "e- bremsstrahlung in C-12");
+//      analysisManager->CreateNtupleDColumn("fEnergyDeposit");
+//      analysisManager->CreateNtupleIColumn("fTrackID");
+      analysisManager->CreateNtupleDColumn("fTrackLength");
 //      analysisManager->CreateNtupleSColumn("fProcess");
     
       analysisManager->FinishNtuple();
