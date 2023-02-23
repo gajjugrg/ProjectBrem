@@ -3,11 +3,12 @@
 
 #include "G4UserRunAction.hh"
 #include "globals.hh"
+#include "G4Version.hh"
 
 // version dependent header files
 #if G4VERSION_NUMBER != 1100
 #include "g4root.hh"  // G4_10
-#elif
+#else
 #include "G4AnalysisManager.hh" // G4_11
 #endif
 

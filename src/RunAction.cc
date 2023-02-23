@@ -1,5 +1,4 @@
 #include <sstream>
-
 #include "RunAction.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "DetectorConstruction.hh"
@@ -19,54 +18,56 @@ namespace Brem
 RunAction::RunAction()
 {
     // set printing event number per each event
-      G4RunManager::GetRunManager()->SetPrintProgress(1);
+    G4RunManager::GetRunManager()->SetPrintProgress(1);
     // inform the runManager to save random number seed
     //G4RunManager::GetRunManager()->SetRandomNumberStore(false);
-      // Get analysis manager
-      auto analysisManager = G4AnalysisManager::Instance();
-      
-      // Create directories
-      //analysisManager->SetHistoDirectoryName("histograms");
-      //analysisManager->SetNtupleDirectoryName("ntuple");
-      analysisManager->SetVerboseLevel(1);
-      analysisManager->SetNtupleMerging(true);
-      
-
-      // Creating ntuple
-      //
-      analysisManager->CreateNtuple("brem", "e- bremsstrahlung in C-12");
-//      analysisManager->CreateNtupleDColumn("fEnergyDeposit");
-//      analysisManager->CreateNtupleIColumn("fTrackID");
-      analysisManager->CreateNtupleDColumn("fInitEnergy");
-      analysisManager->CreateNtupleDColumn("fTrackLength");
-//      analysisManager->CreateNtupleSColumn("fProcess");
+    // Get analysis manager
+    auto analysisManager = G4AnalysisManager::Instance();
     
-      analysisManager->FinishNtuple();
+    // Create directories
+    //analysisManager->SetHistoDirectoryName("histograms");
+    //analysisManager->SetNtupleDirectoryName("ntuple");
+    analysisManager->SetVerboseLevel(1);
+    analysisManager->SetNtupleMerging(true);
+    
+    
+    // Creating ntuple
+    //
+    analysisManager->CreateNtuple("brem", "e- bremsstrahlung in C-12");
+    //      analysisManager->CreateNtupleDColumn("fEnergyDeposit");
+    //      analysisManager->CreateNtupleIColumn("fTrackID");
+    analysisManager->CreateNtupleDColumn("fEnergy");
+    analysisManager->CreateNtupleDColumn("fTrackLength");
+    analysisManager->CreateNtupleSColumn("fProcess");
+    
+    analysisManager->FinishNtuple();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 RunAction::RunAction(G4double initEnergy)
-  : fInitEnergy(initEnergy)
+: fInitEnergy(initEnergy)
 {
     // set printing event number per each event
-      G4RunManager::GetRunManager()->SetPrintProgress(1);
-    // inform the runManager to save random number seed
-    //G4RunManager::GetRunManager()->SetRandomNumberStore(false);
-      // Get analysis manager
-      auto analysisManager = G4AnalysisManager::Instance();
-
-      // Create directories
-      analysisManager->SetVerboseLevel(1);
-      analysisManager->SetNtupleMerging(true);
-
-      // Creating ntuple
-      //
-      analysisManager->CreateNtuple("brem", "e- bremsstrahlung in C-12");
-      analysisManager->CreateNtupleDColumn("fInitEnergy");
-      analysisManager->CreateNtupleDColumn("fTrackLength");
-
-      analysisManager->FinishNtuple();
+    G4RunManager::GetRunManager()->SetPrintProgress(1);
+    
+    
+    
+    // Get analysis manager
+    auto analysisManager = G4AnalysisManager::Instance();
+    
+    // Create directories
+    analysisManager->SetVerboseLevel(1);
+    analysisManager->SetNtupleMerging(true);
+    
+    // Creating ntuple
+    //
+    analysisManager->CreateNtuple("brem", "e- bremsstrahlung in C-12");
+    analysisManager->CreateNtupleIColumn("TrackID");
+    analysisManager->CreateNtupleDColumn("fKineticEnergy");
+    analysisManager->CreateNtupleDColumn("fTrackLength_X0");
+    analysisManager->CreateNtupleSColumn("fProcess");
+    analysisManager->FinishNtuple();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -92,7 +93,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
 void RunAction::EndOfRunAction(const G4Run*)
 {
     auto analysisManager = G4AnalysisManager::Instance();
-
+    
     //write and close the file at the end of each run
     analysisManager->Write();
     analysisManager->CloseFile();
