@@ -1,10 +1,10 @@
 # ProjectBrem
 -------------------------------------------------------------------
-												Project Brem
-													-----------
-
- This project is a simple application of GEANT4 to simulate the bremsstrahlung 
- process of High Energy electron in Carbon. Modified from GEANT4 example B1. 
+			Project Brem						
+-------------------------------------------------------------------
+ This project is a simple application of GEANT4 to simulate the 
+ bremsstrahlung process of High Energy electron in Carbon. Modified 
+ from GEANT4 example B1. 
 
 
  1- GEOMETRY DEFINITION
