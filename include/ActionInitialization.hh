@@ -13,14 +13,12 @@ class ActionInitialization : public G4VUserActionInitialization
 {
   public:
     ActionInitialization();
-    ActionInitialization(G4double initEnergy);
     ~ActionInitialization() override;
 
     void BuildForMaster() const override;
     void Build() const override;
 
   private:
-    G4double fInitEnergy;
 };
 
 }

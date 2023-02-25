@@ -24,26 +24,18 @@ using namespace Brem;
 
 int main(int argc,char** argv)
 {
+    G4UIExecutive* ui = nullptr;
+    if ( argc == 1 ) { ui = new G4UIExecutive(argc, argv); }
     
-    G4double fInitEnergy = (G4double)atof(argv[1]); // this should be 0.01 (here we used GeV unit)
-    
-    // Optionally: choose a different Random engine...
-    // G4Random::setTheEngine(new CLHEP::MTwistEngine);
-    
-    //use G4SteppingVerboseWithUnits
-    
+//    auto* runManager =
+//    G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
     // version dependent function call
 #if G4VERSION_NUMBER == 1100
     G4int precision = 4;
     G4SteppingVerbose::UseBestUnit(precision);
 #endif
     
-    // Construct the default run manager
-    //
-    /*
-     auto* runManager =
-     G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
-     */ // for G4_11
+//    // Construct the default run manager
 #ifdef G4MULTITHREADED
     G4MTRunManager* runManager = new G4MTRunManager;
     runManager->SetNumberOfThreads(2*(G4Threading::G4GetNumberOfCores()));
@@ -53,9 +45,6 @@ int main(int argc,char** argv)
     G4cout << "Single threaded" << G4endl;
 #endif
     //
-    
-    runManager->SetNumberOfThreads(1);
-    
     // Set mandatory initialization classes
     //
     // Detector construction
@@ -66,9 +55,7 @@ int main(int argc,char** argv)
     physicsList->SetVerboseLevel(1);
     runManager->SetUserInitialization(physicsList);
     
-    // User action initialization
-    runManager->SetUserInitialization(new ActionInitialization(fInitEnergy));
-    
+    runManager->SetUserInitialization(new ActionInitialization());
     // Initialize visualization
     //
     G4VisManager* visManager = new G4VisExecutive;
@@ -78,33 +65,19 @@ int main(int argc,char** argv)
     
     G4cout << "Version: " << G4VERSION_NUMBER << G4endl;
     // Detect interactive mode (if no arguments) and define UI session
-    //
-    G4UIExecutive* ui = nullptr;
+
     
     // Get the pointer to the User Interface manager
     G4UImanager* UImanager = G4UImanager::GetUIpointer();
     
-    if ( argc == 1 ) { ui = new G4UIExecutive(argc, argv); }
-    else
-    {
-        // batch mode version 2
-        //  Example:
-        //  $ ./Brem 0.01
-        UImanager->ApplyCommand("/control/execute batch.mac");
-    }
-    
-    // Process macro or start UI session
-    //
     if ( ! ui ) {
-        // batch mode
-        /*
+//         batch mode
          G4String command = "/control/execute ";
          G4String fileName = argv[1];
          UImanager->ApplyCommand(command+fileName);
-         */
     }
     else {
-        // interactive mode
+        //interactive mode
         UImanager->ApplyCommand("/control/execute init_vis.mac");
         ui->SessionStart();
         delete ui;

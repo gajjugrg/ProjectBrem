@@ -20,8 +20,7 @@ namespace Brem
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-EventAction::EventAction(/*RunAction* runAction*/)
-//: fRunAction(runAction)
+EventAction::EventAction()
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

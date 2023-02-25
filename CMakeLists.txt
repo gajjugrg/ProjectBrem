@@ -47,6 +47,8 @@ set(Brem_SCRIPTS
   run1.mac
   run2.mac
   vis.mac
+  batch.mac
+  plotTrackLenVsEne.C
   scripts/generate_runscripts.sh
   scripts/submit.sh
   )

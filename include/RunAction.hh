@@ -21,7 +21,6 @@ class RunAction : public G4UserRunAction
 {
   public:
     RunAction();
-    RunAction(G4double initEnergy);
     ~RunAction() override;
 
     void BeginOfRunAction(const G4Run*) override;
@@ -29,7 +28,6 @@ class RunAction : public G4UserRunAction
     
     
 private:
-    G4double fInitEnergy;
 
 };
 
