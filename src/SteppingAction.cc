@@ -50,9 +50,9 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
 			//        G4cout << "******************* Data is recorded **********************" << G4endl;
 			//        G4cout << "fTrackLength: " << trkLength/CLHEP::cm << " cm, Kinetic Energy: " << fKineticEnergy/CLHEP::MeV << " MeV, Process
 			//Name: " << ProcName << G4endl;
-			analysisManager->FillH1(0, fKineticEnergy/CLHEP::MeV);
-			analysisManager->FillH1(1, (trkLength/CLHEP::cm)/ 18.85);
-			analysisManager->FillH2(0, fKineticEnergy/CLHEP::MeV, (trkLength/CLHEP::cm)/ 18.85);
+//			analysisManager->FillH1(0, fKineticEnergy/CLHEP::MeV);
+//			analysisManager->FillH1(1, (trkLength/CLHEP::cm)/ 18.85);
+//			analysisManager->FillH2(0, fKineticEnergy/CLHEP::MeV, (trkLength/CLHEP::cm)/ 18.85);
 			analysisManager->FillNtupleIColumn(0, track->GetTrackID());
 			analysisManager->FillNtupleDColumn(1, fKineticEnergy/CLHEP::MeV);
 			analysisManager->FillNtupleDColumn(2, (trkLength/CLHEP::cm)/ 18.85);

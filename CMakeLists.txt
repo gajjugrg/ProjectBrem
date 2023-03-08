@@ -48,9 +48,9 @@ set(Brem_SCRIPTS
   run2.mac
   vis.mac
   batch.mac
-  plotTrackLenVsEne.C
   scripts/generate_runscripts.sh
   scripts/submit.sh
+  plotting/plotTrackLenVsEne.C
   )
 
 foreach(_script ${Brem_SCRIPTS})

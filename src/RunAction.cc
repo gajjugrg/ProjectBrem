@@ -26,10 +26,10 @@ RunAction::RunAction()
 	
 	// Create directories
 	analysisManager->SetVerboseLevel(1);
-	analysisManager->CreateH1("Energy"," Energy in each step", 5000, 0., 100*GeV);
-	analysisManager->CreateH1("Tracklength","Tracklength/X_{0}", 5000, 0., 20.);
-	analysisManager->CreateH2("TrckLenVsEnergy","Tracklength/X_{0} vs Energy", 5000, 0., 100*GeV,
-														5000, 0., 20.);
+//	analysisManager->CreateH1("Energy"," Energy in each step", 5000, 0., 100*GeV);
+//	analysisManager->CreateH1("Tracklength","Tracklength/X_{0}", 5000, 0., 20.);
+//	analysisManager->CreateH2("TrckLenVsEnergy","Tracklength/X_{0} vs Energy", 5000, 0., 100*GeV,
+//														5000, 0., 20.);
 	analysisManager->SetNtupleMerging(true);
 	// Creating ntuple
 	analysisManager->CreateNtuple("brem", "e- bremsstrahlung in C-12");

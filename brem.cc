@@ -38,7 +38,7 @@ int main(int argc,char** argv)
 //    // Construct the default run manager
 #ifdef G4MULTITHREADED
     G4MTRunManager* runManager = new G4MTRunManager;
-    runManager->SetNumberOfThreads(2*(G4Threading::G4GetNumberOfCores()));
+	runManager->SetNumberOfThreads(4); //(2*(G4Threading::G4GetNumberOfCores()));
     G4cout << "Multithreaded" << G4endl;
 #else
     G4RunManager* runManager = new G4RunManager;
