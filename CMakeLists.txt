@@ -51,6 +51,7 @@ set(Brem_SCRIPTS
   scripts/generate_runscripts.sh
   scripts/submit.sh
   plotting/plotTrackLenVsEne.C
+  plotting/comparePlot.C
   )
 
 foreach(_script ${Brem_SCRIPTS})
