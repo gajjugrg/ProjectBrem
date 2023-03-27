@@ -50,8 +50,11 @@ set(Brem_SCRIPTS
   batch.mac
   scripts/generate_runscripts.sh
   scripts/submit.sh
-  plotting/plotTrackLenVsEne.C
-  plotting/comparePlot.C
+  analysis/overLay.C
+  analysis/plotSlices.C
+  analysis/analyticalData/ana00.txt
+  analysis/analyticalData/ana01.txt
+  analysis/analyticalData/ana02.txt
   )
 
 foreach(_script ${Brem_SCRIPTS})
@@ -66,7 +69,7 @@ endforeach()
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(B1 DEPENDS Brem)
+#add_custom_target(B1 DEPENDS Brem)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
