@@ -1,6 +1,6 @@
 ## Plotting functions for analysing the data
 
-ana*.txt is the analytical data from Adrian:
+analyticalData/ is the analytical data from Adrian:
 | label | Final Energy E_0|
 |-------|------------|
 |ana00.txt| 200 MeV|

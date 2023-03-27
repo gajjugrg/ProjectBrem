@@ -9,7 +9,7 @@ void overLay(){
 	for(Int_t i = 0; i < 3; i++)
 	{
 		Int_t count = 1;
-		TString filename = Form("ana0%d.txt", i);
+		TString filename = Form("analyticalData/ana0%d.txt", i);
 		ifstream in;
 		in.open(filename);
 		while(!in.eof())
