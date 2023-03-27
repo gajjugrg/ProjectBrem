@@ -22,7 +22,7 @@
 
  3- ACTION INITALIZATION
 
-   A newly introduced class, Brem::ActionInitialization, instantiates and registers
+   Brem::ActionInitialization, instantiates and registers
    to Geant4 kernel all user action classes.
 
    While in sequential mode the action classes are instatiated just once,
@@ -39,14 +39,13 @@
  4- PRIMARY GENERATOR
 
    The primary generator is defined in the Brem::PrimaryGeneratorAction class.
-   The default kinematics is a 1 GeV electron, in front
-   of the envelope.
+   The default kinematics is a 1 GeV electron, in front of the envelope.
 
  5- DETECTOR RESPONSE
  
 	 The information about the primary electron track is recorded. The kinetic 
 	 energy and track length at each step is recored. 
-	  
+
  B- USER INTERFACES
 
    The user command interface is set via the G4UIExecutive class

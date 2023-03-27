@@ -16,6 +16,7 @@ void overLay(){
 		{
 			in >> binCen >> TrkLen;
 			Ana_slice[i] -> SetBinContent(count, TrkLen);
+			Ana_slice[i]->SetBinError(count, 0);
 			count ++;
 		}
 		in.close();
@@ -25,7 +26,12 @@ void overLay(){
 	TH1F* MC_slice0 = (TH1F*)f -> Get("slice0");
 	MC_slice0->Sumw2();
 	TH1F* MC_slice1 = (TH1F*)f -> Get("slice1");
+	MC_slice1->Sumw2();
 	TH1F* MC_slice2 = (TH1F*)f -> Get("slice2");
+	MC_slice2->Sumw2();
+	
+	
+	gStyle->SetLegendFont(80);
 
 	TCanvas* c = new TCanvas("c", "Ratio of Probability distribution at 200 MeV");
 	gStyle->SetOptStat(0);
@@ -34,7 +40,7 @@ void overLay(){
 	Ana_slice[0]->ResetStats();
 	MC_slice0->ResetStats();
 	auto rp = new TRatioPlot(Ana_slice[0], MC_slice0, "divsym");
-	c->SetTicks(0, 1);
+//	c->SetTicks(0, 1);
 	rp->Draw();
 	rp->GetUpperPad()->cd();
 	auto leg0 = new TLegend();
@@ -51,7 +57,7 @@ void overLay(){
 	Ana_slice[1]->ResetStats();
 	MC_slice1->ResetStats();
 	auto rp1 = new TRatioPlot(Ana_slice[1], MC_slice1, "divsym");
-	c1->SetTicks(0, 1);
+//	c1->SetTicks(0, 1);
 	rp1->Draw();
 	rp1->GetUpperPad()->cd();
 	auto leg1 = new TLegend();
@@ -65,10 +71,14 @@ void overLay(){
 	gStyle->SetOptStat(0);
 	Ana_slice[2]->Scale(1./Ana_slice[2]->Integral("width"));
 	MC_slice2->Scale(1./MC_slice2->Integral("width"));
+	Int_t bin = 50;
 	Ana_slice[2]->ResetStats();
+	Double_t errorAna = Ana_slice[2]->GetBinError(bin);
+	Double_t errorMC = MC_slice2->GetBinError(bin);
+	cout << "Analytical Error : " << errorAna << " MC Error: " << errorMC << endl;
 	MC_slice2->ResetStats();
 	auto rp2 = new TRatioPlot(Ana_slice[2], MC_slice2, "divsym");
-	c2->SetTicks(0, 1);
+//	c2->SetTicks(0, 1);
 	rp2->Draw();
 	rp2->GetUpperPad()->cd();
 	auto leg2 = new TLegend();
