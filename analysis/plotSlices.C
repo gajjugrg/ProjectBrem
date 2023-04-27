@@ -1,5 +1,6 @@
 void plotSlices(){
-	TFile* file = new TFile("$HOME/projectBrem/build/bremOutput_60GeV_10MillEvnts.root", "read");
+	TFile* file = new TFile("$HOME/projectBrem/outputfiles/bremOutput_100GeV_FTFP_BERT.root", "read");
+	//TFile* file = new TFile("$HOME/projectBrem/outputfiles/bremOutput_100GeV_0.0009.root", "read");
 	TTree* ana = (TTree*)file->Get("brem");
 
 	Double_t nEntries = ana->GetEntries();
@@ -16,11 +17,11 @@ void plotSlices(){
 	ana->SetBranchAddress("fProcess", &fProcess);
 
 	// Initialize the 1-D histogram for each slice of energy
-	TH1D* slice0 = new TH1D("slice0", "1 GeV", 100, 0, 20);
+	TH1D* slice0 = new TH1D("slice0", "10 GeV", 100, 0, 10);
 	slice0 -> SetLineColor(8);
-	TH1D* slice1 = new TH1D("slice1", "25 GeV", 100, 0, 20);
+	TH1D* slice1 = new TH1D("slice1", "30 GeV", 100, 0, 10);
 	slice1 -> SetLineColor(6);
-	TH1D* slice2 = new TH1D("slice2", "55 GeV", 100, 0, 20);
+	TH1D* slice2 = new TH1D("slice2", "45 GeV", 100, 0, 10);
 	slice2 -> SetLineColor(4);
 	
 	// Filling the histograms
@@ -30,9 +31,9 @@ void plotSlices(){
 		
 //		TrkLenVsEne->Fill(fKineticEnergy, fTrackLength_X0);
 // This is one way to fill the projection histograms, works well if you want to specify a different bin width than original 2D plot
-		if(fKineticEnergy  >= 990 && fKineticEnergy <= 1010){slice0->Fill(fTrackLength_X0);}
-		if(fKineticEnergy >= 24990 && fKineticEnergy <= 25010){slice1 ->Fill(fTrackLength_X0);}
-		if(fKineticEnergy >= 54990 && fKineticEnergy <= 55010){slice2 ->Fill(fTrackLength_X0);}
+		if(fKineticEnergy >= 9990 && fKineticEnergy < 10010){slice0->Fill(fTrackLength_X0);}
+		if(fKineticEnergy >= 29990 && fKineticEnergy < 30010){slice1 ->Fill(fTrackLength_X0);}
+		if(fKineticEnergy >= 44990 && fKineticEnergy < 45010){slice2 ->Fill(fTrackLength_X0);}
 	}
 	auto c = new TCanvas("c","c");
 	slice0->DrawNormalized("e1p");
@@ -42,12 +43,12 @@ void plotSlices(){
 	gStyle->SetOptStat(0); //this removes the Statbox
 	auto legend = new TLegend();
 	legend->SetHeader("Legend","C");
-	legend->AddEntry(slice0,"1 GeV","l");
-	legend->AddEntry(slice1,"35 GeV","l");
+	legend->AddEntry(slice0,"10 GeV","l");
+	legend->AddEntry(slice1,"30 GeV","l");
 	legend->AddEntry(slice2,"45 GeV", "l");
 	legend->Draw();
 	
-	TFile f("slicesMC.root","recreate");
+	TFile f("slicesG4.root","recreate");
 	slice0->Write();
 	slice1->Write();
 	slice2->Write();

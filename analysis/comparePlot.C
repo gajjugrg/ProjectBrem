@@ -1,5 +1,5 @@
 void comparePlot(){
-	TFile* file = new TFile("../bremOutput.root", "read");
+	TFile* file = new TFile("../../outputfiles/bremOutput_1GeV_10MillEvnts.root", "read");
 	TTree* ana = (TTree*)file->Get("brem");
 
 	Double_t nEntries = ana->GetEntries();
