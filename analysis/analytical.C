@@ -5,7 +5,7 @@ Double_t Intensity(Double_t E_0, Double_t E, Double_t t){
 void analytical(){
 
 Int_t N = 20000;
-Double_t E_0 = 60e9 ; //Initial Energy of the electron
+Double_t E_0 = 100e9 ; //Initial Energy of the electron
 Double_t E_i[3] = {9990e6, 29990e6, 44990e6}; //Energy slice starting E_slice - 10 MeV
 Double_t delta_t = 0.001; //Step in track length
 Double_t delta_E = 0.001; //Step in Energy (for +- 10 MeV)
@@ -15,7 +15,7 @@ Double_t Prob; //Place holder for probability
 TH1F* slice[3];
 for(Int_t i = 0 ; i < 3 ; i++){
 	TString name = Form("slice%d", i);
-	slice[i] = new TH1F(name , "Track Length Distribution at given Energies #pm 10 MeV; Tracklength in units of Radiation Length; Probability / Bin", 100, 0, 10);
+	slice[i] = new TH1F(name , "x; Depth in units of Radiation Length; Probability / Bin", 100, 0, 10);
 	slice[i] -> SetLineColor(i+1);
 }
 

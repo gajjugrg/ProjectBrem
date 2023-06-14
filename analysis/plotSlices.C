@@ -1,6 +1,5 @@
 void plotSlices(){
-	TFile* file = new TFile("$HOME/projectBrem/outputfiles/bremOutput_100GeV_FTFP_BERT.root", "read");
-	//TFile* file = new TFile("$HOME/projectBrem/outputfiles/bremOutput_100GeV_0.0009.root", "read");
+	TFile* file = new TFile("$HOME/projectBrem/outputfiles/outputfiles/bremOutput_100GeV_FTFP_BERT_DMM_0.01_EPS_0.010_10kEVT_Bias1e7.root", "read");
 	TTree* ana = (TTree*)file->Get("brem");
 
 	Double_t nEntries = ana->GetEntries();
@@ -17,20 +16,17 @@ void plotSlices(){
 	ana->SetBranchAddress("fProcess", &fProcess);
 
 	// Initialize the 1-D histogram for each slice of energy
-	TH1D* slice0 = new TH1D("slice0", "10 GeV", 100, 0, 10);
+	TH1D* slice0 = new TH1D("slice0", "; Depth in units of Radiation Length; Probability / Bin ", 100, 0, 10);
 	slice0 -> SetLineColor(8);
-	TH1D* slice1 = new TH1D("slice1", "30 GeV", 100, 0, 10);
+	TH1D* slice1 = new TH1D("slice1", "; Depth in units of Radiation Length; Probability / Bin ", 100, 0, 10);
 	slice1 -> SetLineColor(6);
-	TH1D* slice2 = new TH1D("slice2", "45 GeV", 100, 0, 10);
+	TH1D* slice2 = new TH1D("slice2", "; Depth in units of Radiation Length; Probability / Bin", 100, 0, 10);
 	slice2 -> SetLineColor(4);
 	
 	// Filling the histograms
 	for(Int_t i = 0; i < ana->GetEntries(); i ++){
 		ana->GetEntry(i);
 		if( TrackID != 1) continue;
-		
-//		TrkLenVsEne->Fill(fKineticEnergy, fTrackLength_X0);
-// This is one way to fill the projection histograms, works well if you want to specify a different bin width than original 2D plot
 		if(fKineticEnergy >= 9990 && fKineticEnergy < 10010){slice0->Fill(fTrackLength_X0);}
 		if(fKineticEnergy >= 29990 && fKineticEnergy < 30010){slice1 ->Fill(fTrackLength_X0);}
 		if(fKineticEnergy >= 44990 && fKineticEnergy < 45010){slice2 ->Fill(fTrackLength_X0);}
@@ -48,7 +44,7 @@ void plotSlices(){
 	legend->AddEntry(slice2,"45 GeV", "l");
 	legend->Draw();
 	
-	TFile f("slicesG4.root","recreate");
+	TFile f("slicesDMG4_0.010_Bias1e7.root","recreate");
 	slice0->Write();
 	slice1->Write();
 	slice2->Write();
