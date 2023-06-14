@@ -1,3 +1,5 @@
+// Author: Gajendra Gurung
+// University of Texas at Arlington
 // This is the function to plot the analytical data: equation 22 from https://doi.org/10.1103/PhysRev.149.1248
 Double_t Intensity(Double_t E_0, Double_t E, Double_t t){
 	return (1/E_0)*(1/tgamma(4*t/3))*pow(log(E_0/E),4*t/3-1);
