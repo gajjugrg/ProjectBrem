@@ -12,28 +12,28 @@ void overlay2(){
 	MC_slice[2] = (TH1F*)f -> Get("slice2"); MC_slice[2] -> SetLineColor(9); MC_slice[2] -> Sumw2();
 	
 	TH1F* DMG4_1000_slice[3];
-	TFile* h = new TFile("slicesDMG4_0.1000.root");
+	TFile* h = new TFile("slicesDMG4_PS_Bias1e3.root");
 	DMG4_1000_slice[0] = (TH1F*)h -> Get("slice0"); DMG4_1000_slice[0] -> SetLineColor(11); DMG4_1000_slice[0] -> Sumw2();
 	DMG4_1000_slice[1] = (TH1F*)h -> Get("slice1"); DMG4_1000_slice[1] -> SetLineColor(11); DMG4_1000_slice[1] -> Sumw2();
 	DMG4_1000_slice[2] = (TH1F*)h -> Get("slice2"); DMG4_1000_slice[2] -> SetLineColor(11); DMG4_1000_slice[2] -> Sumw2();
 	
 	TH1F* DMG4_0100_slice[3];
-	TFile* i = new TFile("slicesDMG4_0.0100.root");
+	TFile* i = new TFile("slicesDMG4_PS_Bias1e5.root");
 	DMG4_0100_slice[0] = (TH1F*)i -> Get("slice0"); DMG4_0100_slice[0] -> SetLineColor(24); DMG4_0100_slice[0] -> Sumw2();
 	DMG4_0100_slice[1] = (TH1F*)i -> Get("slice1"); DMG4_0100_slice[1] -> SetLineColor(24); DMG4_0100_slice[1] -> Sumw2();
 	DMG4_0100_slice[2] = (TH1F*)i -> Get("slice2"); DMG4_0100_slice[2] -> SetLineColor(24); DMG4_0100_slice[2] -> Sumw2();
 	
-	TH1F* DMG4_0010_slice[3];
-	TFile* j = new TFile("slicesDMG4_0.0010.root");
-	DMG4_0010_slice[0] = (TH1F*)j -> Get("slice0"); DMG4_0010_slice[0] -> SetLineColor(27); DMG4_0010_slice[0] -> Sumw2();
-	DMG4_0010_slice[1] = (TH1F*)j -> Get("slice1"); DMG4_0010_slice[1] -> SetLineColor(27); DMG4_0010_slice[1] -> Sumw2();
-	DMG4_0010_slice[2] = (TH1F*)j -> Get("slice2"); DMG4_0010_slice[2] -> SetLineColor(27); DMG4_0010_slice[2] -> Sumw2();
-
-	TH1F* DMG4_0001_slice[3];
-	TFile* k = new TFile("slicesDMG4_0.0001.root");
-	DMG4_0001_slice[0] = (TH1F*)k -> Get("slice0"); DMG4_0001_slice[0] -> SetLineColor(34); DMG4_0001_slice[0] -> Sumw2();
-	DMG4_0001_slice[1] = (TH1F*)k -> Get("slice1"); DMG4_0001_slice[1] -> SetLineColor(34); DMG4_0001_slice[1] -> Sumw2();
-	DMG4_0001_slice[2] = (TH1F*)k -> Get("slice2"); DMG4_0001_slice[2] -> SetLineColor(34); DMG4_0001_slice[2] -> Sumw2();
+	//TH1F* DMG4_0010_slice[3];
+////	TFile* j = new TFile("slicesDMG4_0.0010.root");
+//	DMG4_0010_slice[0] = (TH1F*)j -> Get("slice0"); DMG4_0010_slice[0] -> SetLineColor(27); DMG4_0010_slice[0] -> Sumw2();
+//	DMG4_0010_slice[1] = (TH1F*)j -> Get("slice1"); DMG4_0010_slice[1] -> SetLineColor(27); DMG4_0010_slice[1] -> Sumw2();
+//	DMG4_0010_slice[2] = (TH1F*)j -> Get("slice2"); DMG4_0010_slice[2] -> SetLineColor(27); DMG4_0010_slice[2] -> Sumw2();
+//
+//	TH1F* DMG4_0001_slice[3];
+//	TFile* k = new TFile("slicesDMG4_0.0001.root");
+//	DMG4_0001_slice[0] = (TH1F*)k -> Get("slice0"); DMG4_0001_slice[0] -> SetLineColor(34); DMG4_0001_slice[0] -> Sumw2();
+//	DMG4_0001_slice[1] = (TH1F*)k -> Get("slice1"); DMG4_0001_slice[1] -> SetLineColor(34); DMG4_0001_slice[1] -> Sumw2();
+//	DMG4_0001_slice[2] = (TH1F*)k -> Get("slice2"); DMG4_0001_slice[2] -> SetLineColor(34); DMG4_0001_slice[2] -> Sumw2();
 
 	gStyle->SetOptStat(0);
 	gStyle->SetLegendFont(80);
@@ -47,26 +47,26 @@ void overlay2(){
 	cout << DMG4_1000_slice[0]->Integral() << endl;
 	DMG4_0100_slice[0]->Scale(.1/DMG4_0100_slice[0]->Integral(), "width");
 	cout << DMG4_0100_slice[0]->Integral() << endl;
-	DMG4_0010_slice[0]->Scale(.1/DMG4_0010_slice[0]->Integral(), "width");
-	cout << DMG4_0010_slice[0]->Integral() << endl;
-	DMG4_0001_slice[0]->Scale(.1/DMG4_0001_slice[0]->Integral(), "width");
-	cout << DMG4_0001_slice[0]->Integral() << endl;
+//	DMG4_0010_slice[0]->Scale(.1/DMG4_0010_slice[0]->Integral(), "width");
+//	cout << DMG4_0010_slice[0]->Integral() << endl;
+//	DMG4_0001_slice[0]->Scale(.1/DMG4_0001_slice[0]->Integral(), "width");
+//	cout << DMG4_0001_slice[0]->Integral() << endl;
 
 	Ana_slice[0]->Draw("hist");
 	MC_slice[0]->Draw("same");
 	DMG4_1000_slice[0]->Draw("same");
 	DMG4_0100_slice[0]->Draw("same");
-	DMG4_0010_slice[0]->Draw("same");
-	DMG4_0001_slice[0]->Draw("same");
+//	DMG4_0010_slice[0]->Draw("same");
+//	DMG4_0001_slice[0]->Draw("same");
 
 	auto leg = new TLegend();
 	leg->SetHeader("Legend","C");
 	leg->AddEntry(Ana_slice[0],"10 GeV/ Ana","l");
 	leg->AddEntry(MC_slice[0],"10 GeV/ G4","l");
-	leg->AddEntry(DMG4_1000_slice[0],"10 GeV/ DMG4 0.1000","l");
-	leg->AddEntry(DMG4_0100_slice[0],"10 GeV/ DMG4 0.0100","l");
-	leg->AddEntry(DMG4_0010_slice[0],"10 GeV/ DMG4 0.0010","l");
-	leg->AddEntry(DMG4_0001_slice[0],"10 GeV/ DMG4 0.0001","l");
+	leg->AddEntry(DMG4_1000_slice[0],"10 GeV/ DMG4 Pseudoscalar Bais 1e3","l");
+	leg->AddEntry(DMG4_0100_slice[0],"10 GeV/ DMG4 Pseudoscalar Bais 1e5","l");
+//	leg->AddEntry(DMG4_0010_slice[0],"10 GeV/ DMG4 0.0010","l");
+//	leg->AddEntry(DMG4_0001_slice[0],"10 GeV/ DMG4 0.0001","l");
 	leg->Draw();
 	c->Update();
 	
