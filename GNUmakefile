@@ -1,5 +1,5 @@
 # --------------------------------------------------------------
-# GNUmakefile for examples module.  Gabriele Cosmo, 06/04/98.
+# GNUmakefile for Project Brem. June 14, 2023.
 # --------------------------------------------------------------
 
 name := Brem
