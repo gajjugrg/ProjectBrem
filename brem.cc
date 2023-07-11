@@ -62,6 +62,7 @@ int main(int argc,char** argv)
     // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
     // G4VisManager* visManager = new G4VisExecutive("Quiet");
     visManager->Initialize();
+
     
     G4cout << "Version: " << G4VERSION_NUMBER << G4endl;
     // Detect interactive mode (if no arguments) and define UI session
