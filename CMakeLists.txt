@@ -50,11 +50,6 @@ set(Brem_SCRIPTS
   batch.mac
   scripts/generate_runscripts.sh
   scripts/submit.sh
-  analysis/overLay.C
-  analysis/plotSlices.C
-  analysis/analyticalData/ana00.txt
-  analysis/analyticalData/ana01.txt
-  analysis/analyticalData/ana02.txt
   )
 
 foreach(_script ${Brem_SCRIPTS})

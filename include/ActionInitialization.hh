@@ -3,6 +3,7 @@
 
 #include "G4Types.hh"
 #include "G4VUserActionInitialization.hh"
+#include "G4String.hh"
 
 /// Action initialization class.
 
@@ -13,12 +14,14 @@ class ActionInitialization : public G4VUserActionInitialization
 {
   public:
     ActionInitialization();
-    ~ActionInitialization() override;
+    ActionInitialization(const G4String* outputFileNamePtr);
+    ~ActionInitialization();
 
-    void BuildForMaster() const override;
-    void Build() const override;
+    virtual void BuildForMaster() const;
+    virtual void Build() const;
 
   private:
+    const G4String* fOutputFileNamePtr;
 };
 
 }

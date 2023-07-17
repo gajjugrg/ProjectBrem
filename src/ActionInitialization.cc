@@ -10,8 +10,12 @@ namespace Brem
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 ActionInitialization::ActionInitialization()
+  : fOutputFileNamePtr(nullptr)
 {}
 
+ActionInitialization::ActionInitialization(const G4String* outputFileNamePtr)
+  : fOutputFileNamePtr(outputFileNamePtr)
+{}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -22,7 +26,11 @@ ActionInitialization::~ActionInitialization()
 
 void ActionInitialization::BuildForMaster() const
 {
-	RunAction* runAction = new RunAction();
+	RunAction* runAction;
+ if( fOutputFileNamePtr != nullptr)
+  runAction = new RunAction(fOutputFileNamePtr);
+ else 
+   runAction = new RunAction();
 	SetUserAction(runAction);
 }
 
@@ -30,9 +38,12 @@ void ActionInitialization::BuildForMaster() const
 
 void ActionInitialization::Build() const
 {
-	// Default constructor ( 1 GeV electron )
 	SetUserAction(new PrimaryGeneratorAction());
-	RunAction* runAction = new RunAction();
+    RunAction* runAction; 
+	if (fOutputFileNamePtr != nullptr)
+    runAction = new RunAction(fOutputFileNamePtr);
+  else 
+    runAction = new RunAction;
 	SetUserAction(runAction);
 	auto eventAction = new EventAction;
 	SetUserAction(eventAction);

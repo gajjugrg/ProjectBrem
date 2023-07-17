@@ -21,14 +21,14 @@ class RunAction : public G4UserRunAction
 {
   public:
     RunAction();
-    ~RunAction() override;
+    RunAction(const G4String* outputFileNamePtr);
+    virtual ~RunAction();
 
-    void BeginOfRunAction(const G4Run*) override;
-    void   EndOfRunAction(const G4Run*) override;
-    
+    virtual void BeginOfRunAction(const G4Run*);
+    virtual void   EndOfRunAction(const G4Run*);
     
 private:
-
+    const G4String* fOutputFileNamePtr;
 };
 
 }

@@ -39,7 +39,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4cout << env_mat->GetZ() << G4endl;
   G4cout << env_mat->GetDensity()/(g/cm3) << G4endl;
 
-
   // Option to switch on/off checking of volumes overlaps
   //
   G4bool checkOverlaps = true;
